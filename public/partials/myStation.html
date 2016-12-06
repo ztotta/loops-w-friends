@@ -1,0 +1,25 @@
+<div class="container" ng-controller="InstrumentsController as inst">
+
+	<div class="row panel" id="control-panel">
+		<div class="col s4 knob-global">GLOBAL I/O</div>
+		<div class="col s4 knob-global">TEMPO</div>
+		<div class="col s4 knob-global">TEMPO</div>
+		<div class="col s12" id="on-off-panel">
+			<button ng-repeat="instrument in inst.instruments" class="btn button-on-off" ng-click="instrument.show = !instrument.show">{{ instrument.name }}</button>
+		</div>
+	</div>
+
+	<div class="row" ng-repeat="instrument in inst.instruments" ng-show="instrument.show">
+		<div class="panel instrument-panel">
+			<div class="panel-header">
+				<div class="col s4">{{ instrument.name }}</div>
+				<div class="col s4">MUTE I/O</div>
+				<div class="col s4">HIDE</div>
+			</div>
+			<div class="step-panel">
+				<div class="step" ng-repeat="step in instrument.steps" id="{{step.id}}">X</div>
+			</div>
+		</div>
+	</div>
+
+</div>  
