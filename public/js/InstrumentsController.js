@@ -5,12 +5,13 @@
       .module("loopsApp")
       .controller("InstrumentsController", InstrumentsController);
 
-  InstrumentsController.$inject = ["$state"];
+  InstrumentsController.$inject = ["$state", "$scope"];
 
-  function InstrumentsController($state) {
+  function InstrumentsController($state, $scope) {
     var vm = this;
 		
 		vm.createSteps = createSteps;
+		
 		
 		vm.instruments = [
 			{
@@ -65,12 +66,20 @@
 					{
 						id: `${instrument.name}${i}`,
 						on: false,
+						pressed: false,
 						quarterNote: quarterNote
 					}
 				);
 			};
 		};
 		
+		vm.stepOnOff = function(step) {
+			step.on = !step.on;
+		};
+		
+		vm.stepPressed = function(step) {
+			step.pressed = !step.pressed;
+		};
 
     vm.$state = $state;
 
