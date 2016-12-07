@@ -84,6 +84,7 @@ footer {
 .row {
 	width: 100%;
 	margin-bottom: 0 !important;
+	font-size: 1.2em;
 }
 
 nav {
@@ -92,8 +93,8 @@ nav {
 }
 
 .step {
-	height: 55px;
-	width: 55px;
+	height: 58px;
+	width: 57.6px;
 	background-color: #edadcc;
 	border: 1px solid black;
 	border-radius: 5px;
@@ -105,7 +106,7 @@ nav {
 	height: 90%;
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
+	align-items: stretch;
 	justify-content: space-between;
 }
 
@@ -144,7 +145,28 @@ nav {
 }
 #welcome-panel {
 	width: 600px;
-	height: 400px;
+	height: 200px;
 	background-color: #d6d8e4;
 	margin: 74px auto 0 auto;
+}
+
+#register-panel {
+	width: 600px;
+	height: 345px;
+	margin: 74px auto 0 auto;
+	padding: 10px;
+}
+
+#hello-panel {
+	width: 600px;
+	height: 345px;
+	margin: 74px auto 0 auto;
+	padding: 10px;
+}
+
+#login-panel {
+	width: 600px;
+	height: 275px;
+	margin: 74px auto 0 auto;
+	padding: 10px;
 }

@@ -51,7 +51,10 @@ var create = function (req, res, next) {
       newUser.password_digest = hash
       return User.create(newUser)
     })
-    .then(() => res.json({ email: newUser.email }))
+    .then(function () {
+			return jwt.sign({ email: req.body.email }, process.env.JWT_SECRET)
+		})
+		.then(token => res.json({ token: token }));
 }
 
 var index = function(req, res, next){
