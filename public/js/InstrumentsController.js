@@ -10,48 +10,34 @@
   function InstrumentsController($state, $scope) {
     var vm = this;
 		
+		vm.createInstruments = createInstruments;
 		vm.createSteps = createSteps;
 		
-		
-		vm.instruments = [
-			{
-				name: "KICK",
-				steps: [],
-				muted: false,
-				show: true
-			},
-			{
-				name: "SNARE",
-				steps: [],
-				muted: false,
-				show: false
-			},
-			{
-				name: "HIHAT-CLOSED",
-				steps: [],
-				muted: false,
-				show: false
-			},
-			{
-				name: "HIHAT-OPEN",
-				steps: [],
-				muted: false,
-				show: false
-			},
-			{
-				name: "RIMSHOT",
-				steps: [],
-				muted: false,
-				show: false
-			},
-			{
-				name: "CLAP",
-				steps: [],
-				muted: false,
-				show: false
+		vm.instrumentsList = ["KICK", "SNARE", "HIHAT-CLOSED", "HIHAT-OPEN", "RIMSHOT", "CLAP"];
+		vm.instruments = [];
+
+		vm.globalControls = [
+			{ 
+				name: "GLOBAL I/O",
+				on: true
 			}
 		];
-
+		
+		vm.instrumentsList.forEach(instrument => {
+			createInstruments(instrument);
+		});
+		
+		function createInstruments(instrument) {
+				vm.instruments.push({
+					name: instrument,
+					steps: [],
+					muted: false,
+					mutePressed: false,
+					show: false
+				});
+			console.log(vm.instruments)
+		};
+		
 		// For each instrument, call the steps to populate its panel:
 		vm.instruments.forEach((instrument, index) => {
 			createSteps(instrument, index);

@@ -15,7 +15,7 @@
 			  <!-- can DRY up by making object in InstrumentController -->
 				<span class="col s4 panel-button" ng-mousedown="inst.panelButtonPressed()">{{ instrument.name }}</span>
 				<span class="col s4 panel-button">MUTE I/O</span>
-				<span class="col s4 panel-button">HIDE</span>
+				<span class="col s4 panel-button" ng-click="instrument.show = !instrument.show">HIDE</span>
 			</div>
 			<div class="step-panel">
 				<span class="step" ng-repeat="step in instrument.steps" id="{{step.id}}" 
