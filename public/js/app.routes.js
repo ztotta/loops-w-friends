@@ -3,11 +3,10 @@
 
   angular
     .module("loopsApp")
-    .config(AppRoutes)
+//    .config(AppRoutes)
 
-  AppRoutes.$inject = ["$stateProvider", "$urlRouterProvider"];
-
-  function AppRoutes($stateProvider, $urlRouterProvider) {
+//  AppRoutes.$inject = ["$stateProvider", "$urlRouterProvider"];
+		.config(function ($stateProvider, $urlRouterProvider) {
     
 		$urlRouterProvider.otherwise("/welcome");
 		
@@ -57,20 +56,20 @@
 				data: {
 					restricted: 'all'
 				}
-      });
-  }
-		
-//	.run(function($rootScope, $state) {
-//		$rootScope.$on('$stateChangeStart', function(event, toState) {
-//			if (toState.data.restricted == 'login' && !localStorage.token) {
-//						event.preventDefault()
-//						$state.go('login')
-//			}
-//			else if (toState.data.restricted == 'logout' && localStorage.token) {
-//						event.preventDefault()
-//						$state.go('hello')
-//			}
-//		})
-//	})
+      })
+  })
+	
+	.run(function($rootScope, $state) {
+		$rootScope.$on('$stateChangeStart', function(event, toState) {
+			if (toState.data.restricted == 'login' && !localStorage.token) {
+						event.preventDefault()
+						$state.go('login')
+			}
+			else if (toState.data.restricted == 'logout' && localStorage.token) {
+						event.preventDefault()
+						$state.go('hello')
+			}
+		})
+	})
 	
 })();

@@ -19,6 +19,24 @@
 	
 	function HelloController($state, $http, $window) {
 		var self = this;
+		this.email = JSON.parse(atob($window.localStorage.token.split('.')[1])).email
+		this.users = [];
+		
+		$http.get('users?token=' + $window.localStorage.token)
+			.then(function(users) {
+				self.users = users
+			})
+		
+//		$http({
+//			method: 'POST',
+//			url: '/someurl',
+//			data: {
+//				token: $window.localStorage.token
+//			}
+//		})
+//			.then(function(users) {
+//				// do something
+//			})
 		
 		JSON.parse(atob($window.localStorage.token.split('.')[1])).email
 	}

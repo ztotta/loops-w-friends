@@ -38,9 +38,13 @@ var create = function (req, res, next) {
   }
 
   var newUser = new User(req.body)
+	
+	var payload = { email: req.body.email }
+	
   User.findOne({ email: newUser.email })
     .then(function (user) {
       if (user) {
+				payload._id = user._id
         res.json({ error: "User exists" })
       }
       else {
@@ -52,7 +56,7 @@ var create = function (req, res, next) {
       return User.create(newUser)
     })
     .then(function () {
-			return jwt.sign({ email: req.body.email }, process.env.JWT_SECRET)
+			return jwt.sign({ payload }, process.env.JWT_SECRET)
 		})
 		.then(token => res.json({ token: token }));
 }
@@ -62,19 +66,23 @@ var index = function(req, res, next){
     if (err) {
       res.json({message: err});
     } else {
-      res.render('users/index', {users: users});
+      res.json(users);
     }
   });
 };
 
 var show = function(req, res, next){
+	if (req.token._id != req.params.id) {
+		res.status(403).json({ error: "Wrong user in token" });
+		return false
+	}
   User.findById(req.params.id, function(err, user) {
     if (err) {
       res.json({message: 'Could not find user because ' + err});
     } else if (!user) {
       res.json({message: 'No user with this id.'});
     } else {
-      res.render('users/show', {user: user});
+      res.json(user);
     }
   });
 };

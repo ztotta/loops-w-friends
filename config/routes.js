@@ -3,9 +3,10 @@ var express = require('express'),
 
 // Require controllers.
 var usersController = require('../controllers/users');
+var authController = require('../controllers/auth');
 
 // users resource paths:
-router.get('/users',     usersController.index);
+router.get('/users',     authController.isLoggedIn, usersController.index);
 router.post('/users',    usersController.create);
 router.post('/login', 	 usersController.login);
 router.get('/users/:id', usersController.show);
